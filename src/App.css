@@ -33,3 +33,15 @@
     transform: rotate(360deg);
   }
 }
+.First{
+  margin: auto;
+  position: relative;
+  top: 20px;
+  left: 5px;
+}
+.Second{
+  padding: 30px;
+  float: left;
+  width: 300px;
+  text-align: center;
+}

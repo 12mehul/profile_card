@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import CardComponent from "./components/CardComponent";
+import cardData from "./data/data.json"; 
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [allData, setAllData] = useState([]);
+
+  async function handleData(e) {
+    //e.preventDefault();
+    const resp = await axios.get("https://api.github.com/users")
+    
+    setAllData(resp.data);
+     console.log(resp.data);
+    
+  }
+
+  useEffect(() => { handleData(); }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        {allData.map((profile, key) =>(
+          <div key={key}>
+            <CardComponent name={profile.login} image={profile.avatar_url} />
+        </div>
+      ))};
+     </div>
   );
 }
 
